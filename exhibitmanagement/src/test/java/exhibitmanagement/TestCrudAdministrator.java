@@ -4,9 +4,15 @@ import exhibitmanagement.factory.AdministratorFactory;
 import exhibitmanagement.repository.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.testng.annotations.Test;
+
+import java.util.Set;
 
 /**
  * Created by Bonga on 8/6/2016.
@@ -31,4 +37,7 @@ public class TestCrudAdministrator extends AbstractTestNGSpringContextTests {
     @Test(dependsOnMethods = "create")
     public void read() throws Exception {
     }
+
+
+
 }

@@ -19,7 +19,7 @@ public class Administrator implements Serializable {
     private  String name;
     private String surname;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -32,6 +32,11 @@ public class Administrator implements Serializable {
     public String getPersalNumber() {
         return persalNumber;
     }
+
+public Administrator()
+{
+
+}
 
     public Administrator(Builder builder) {
         id = builder.id;
