@@ -1,12 +1,19 @@
 package exhibitmanagement.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * Created by Bonga on 8/13/2016.
  */
+@Entity
 public class Exhibit  implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     private String casNumber;
     private String sceneType; // ballistic, biology, chemistry, precious metals, questioned doc, scientific
