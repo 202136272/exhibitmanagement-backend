@@ -4,12 +4,17 @@ import exhibitmanagement.domain.Exhibit;
 import exhibitmanagement.factory.ExhibitFactory;
 import exhibitmanagement.repository.ExhibitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.testng.annotations.Test;
 
 /**
  * Created by Bonga on 8/13/2016.
  */
+
+@SpringApplicationConfiguration(classes= App.class)
+@WebAppConfiguration
 public class TestCrudExhibit extends AbstractTestNGSpringContextTests {
 
         private long id;
