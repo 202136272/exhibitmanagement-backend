@@ -10,6 +10,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Set;
@@ -28,11 +29,11 @@ public class TestCrudAdministrator extends AbstractTestNGSpringContextTests {
     @Test
     public void create() throws Exception {
 
-        Administrator admin = AdministratorFactory.getAdministrator("123", "bonga", "mabulu");
+        Administrator admin = AdministratorFactory.getAdministrator("1234", "bonga2", "mabulu3");
 
         repository.save(admin);
-        //id = admin.getId();
-        //Assert.assertNotNull(admin.getId());
+        id = admin.getId();
+        Assert.assertNotNull(admin.getId());
     }
     @Test(dependsOnMethods = "create")
     public void read() throws Exception {
