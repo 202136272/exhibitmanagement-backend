@@ -7,16 +7,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 /**
  * Created by Bonga on 8/13/2016.
  */
+@RestController
 public class BiologyController {
 
     // Inject Service
@@ -62,7 +60,7 @@ public class BiologyController {
     public ResponseEntity<Void> createBiology(@RequestBody Biology biology, UriComponentsBuilder ucBuilder) {
         biologyServiceService.create(biology);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/bio/{id}").buildAndExpand(biology.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/biology/{id}").buildAndExpand(biology.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 

@@ -81,9 +81,6 @@ public class Biology implements Serializable {
 
 
 
-        }
-
-    /*
         public Builder copy(Biology biology){
             this.id = biology.getId();
             this.name = biology.getName();
@@ -92,15 +89,24 @@ public class Biology implements Serializable {
 
             return this;
         }
+
+
         public Biology build() {
             return new Biology(this);
         }
 
 
 
+        }
+
+
+
+
+
+
     }
 
-*/
 
 
-}
+
+

@@ -7,10 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
@@ -19,6 +16,7 @@ import java.util.Set;
 /**
  * Created by Bonga on 8/14/2016.
  */
+@RestController
 public class StationController {
 
     // Inject Service
@@ -62,7 +60,7 @@ public class StationController {
     public ResponseEntity<Void> createStation(@RequestBody Station station, UriComponentsBuilder ucBuilder) {
         stationService.create(station);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/stat/{id}").buildAndExpand(station.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/station/{id}").buildAndExpand(station.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 }

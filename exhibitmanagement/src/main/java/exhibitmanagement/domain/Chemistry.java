@@ -14,7 +14,6 @@ public class Chemistry implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-
     private  long id;
     private  String mass;
     private  String amount;

@@ -7,18 +7,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Bonga on 8/14/2016.
  */
+@RestController
 public class InvestigatingOfficerController  {
 
     // Inject Service
@@ -59,11 +56,11 @@ public class InvestigatingOfficerController  {
 
     //-------------------Create a Story--------------------------------------------------------
 
-    @RequestMapping(value = "/io/", method = RequestMethod.POST)
+    @RequestMapping(value = "/officer/create", method = RequestMethod.POST)
     public ResponseEntity<Void> createOfficer(@RequestBody InvestigatingOfficer officer, UriComponentsBuilder ucBuilder) {
         officerService.create(officer);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/io/{id}").buildAndExpand(officer.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/officer/{id}").buildAndExpand(officer.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 }
