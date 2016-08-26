@@ -4,13 +4,15 @@ import exhibitmanagement.domain.Chemistry;
 import exhibitmanagement.repository.ChemistryRepository;
 import exhibitmanagement.services.ChemistryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Bonga on 8/13/2016.
  */
+@Service
 public class ChemistryServiceImpl implements ChemistryService {
 
     @Autowired
@@ -26,10 +28,11 @@ public class ChemistryServiceImpl implements ChemistryService {
     }
 
     @Override
-    public Set<Chemistry> readAll() {
-        Set<Chemistry> result = new HashSet<Chemistry>();
-        while (repository.findAll().iterator().hasNext()) {
-            result.add(repository.findAll().iterator().next());
+    public List<Chemistry> readAll() {
+        List<Chemistry> result = new ArrayList<Chemistry>();
+        Iterable<Chemistry> chemistries = repository.findAll();
+        for (Chemistry chemistry : chemistries) {
+            result.add(chemistry);
         }
         return result;
     }

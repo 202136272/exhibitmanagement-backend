@@ -4,13 +4,14 @@ import exhibitmanagement.domain.Biology;
 import exhibitmanagement.repository.BiologyRepository;
 import exhibitmanagement.services.BiologyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Created by Bonga on 8/13/2016.
  */
+@Service
 public class BiologyServiceImpl  implements BiologyService {
 
 
@@ -27,10 +28,11 @@ public class BiologyServiceImpl  implements BiologyService {
     }
 
     @Override
-    public Set<Biology> readAll() {
-        Set<Biology> result = new HashSet<Biology>();
-        while (repository.findAll().iterator().hasNext()) {
-            result.add(repository.findAll().iterator().next());
+    public List<Biology> readAll() {
+        List<Biology> result = new ArrayList<Biology>();
+        Iterable<Biology> biologies = repository.findAll();
+        for (Biology biology : biologies) {
+            result.add(biology);
         }
         return result;
     }

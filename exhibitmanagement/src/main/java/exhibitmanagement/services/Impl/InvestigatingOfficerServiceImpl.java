@@ -4,13 +4,14 @@ import exhibitmanagement.domain.InvestigatingOfficer;
 import exhibitmanagement.repository.InvestigatingOfficerRepository;
 import exhibitmanagement.services.InvestigatingOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Created by Bonga on 8/14/2016.
  */
+@Service
 public class InvestigatingOfficerServiceImpl implements InvestigatingOfficerService {
 
     @Autowired
@@ -26,10 +27,11 @@ public class InvestigatingOfficerServiceImpl implements InvestigatingOfficerServ
     }
 
     @Override
-    public Set<InvestigatingOfficer> readAll() {
-        Set<InvestigatingOfficer> result = new HashSet<InvestigatingOfficer>();
-        while (repository.findAll().iterator().hasNext()) {
-            result.add(repository.findAll().iterator().next());
+    public List<InvestigatingOfficer> readAll() {
+        List<InvestigatingOfficer> result = new ArrayList<InvestigatingOfficer>();
+        Iterable<InvestigatingOfficer> officers = repository.findAll();
+        for (InvestigatingOfficer officer : officers) {
+            result.add(officer);
         }
         return result;
     }

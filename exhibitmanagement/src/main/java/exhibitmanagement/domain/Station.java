@@ -18,6 +18,12 @@ public class Station implements Serializable {
     private String name;
     private String address;
 
+
+    private Station()
+    {
+
+    }
+
     public String getName() {
         return name;
     }

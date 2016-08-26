@@ -1,5 +1,6 @@
 package exhibitmanagement.services;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,7 +12,7 @@ public interface Service<E, ID> {
 
     E readById(ID id);
 
-    Set<E> readAll();
+    List<E> readAll();
 
     E update(E entity);
 

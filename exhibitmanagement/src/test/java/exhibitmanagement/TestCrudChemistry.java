@@ -1,10 +1,7 @@
 package exhibitmanagement;
 
-import exhibitmanagement.domain.Biology;
 import exhibitmanagement.domain.Chemistry;
-import exhibitmanagement.factory.BiologyFactory;
 import exhibitmanagement.factory.ChemistryFactory;
-import exhibitmanagement.repository.BiologyRepository;
 import exhibitmanagement.repository.ChemistryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;

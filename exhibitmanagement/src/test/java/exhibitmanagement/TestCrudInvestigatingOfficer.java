@@ -1,10 +1,7 @@
 package exhibitmanagement;
 
-import exhibitmanagement.domain.Exhibit;
 import exhibitmanagement.domain.InvestigatingOfficer;
-import exhibitmanagement.factory.ExhibitFactory;
 import exhibitmanagement.factory.InvestigatingOfficerFactory;
-import exhibitmanagement.repository.ExhibitRepository;
 import exhibitmanagement.repository.InvestigatingOfficerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;

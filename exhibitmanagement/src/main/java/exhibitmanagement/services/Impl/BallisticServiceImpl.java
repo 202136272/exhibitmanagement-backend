@@ -1,21 +1,19 @@
 package exhibitmanagement.services.Impl;
 
-import exhibitmanagement.domain.Administrator;
 import exhibitmanagement.domain.Ballistic;
-import exhibitmanagement.repository.AdministratorRepository;
 import exhibitmanagement.repository.BallisticRepository;
-import exhibitmanagement.services.AdministratorService;
 import exhibitmanagement.services.BallisticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Bonga on 8/13/2016.
  */
+@Service
 public class BallisticServiceImpl implements BallisticService {
-
 
         @Autowired
         BallisticRepository repository;
@@ -30,10 +28,11 @@ public class BallisticServiceImpl implements BallisticService {
         }
 
         @Override
-        public Set<Ballistic> readAll() {
-            Set<Ballistic> result = new HashSet<Ballistic>();
-            while (repository.findAll().iterator().hasNext()) {
-                result.add(repository.findAll().iterator().next());
+        public List<Ballistic> readAll() {
+            List<Ballistic> result = new ArrayList<Ballistic>();
+            Iterable<Ballistic> ballistics = repository.findAll();
+            for (Ballistic ballistic : ballistics) {
+                result.add(ballistic);
             }
             return result;
         }

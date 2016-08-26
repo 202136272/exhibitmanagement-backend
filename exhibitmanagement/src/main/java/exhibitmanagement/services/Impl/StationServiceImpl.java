@@ -5,9 +5,8 @@ import exhibitmanagement.repository.StationRepository;
 import exhibitmanagement.services.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Created by Bonga on 8/14/2016.
  */
@@ -27,10 +26,11 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Set<Station> readAll() {
-        Set<Station> result = new HashSet<Station>();
-        while (repository.findAll().iterator().hasNext()) {
-            result.add(repository.findAll().iterator().next());
+    public List<Station> readAll() {
+        List<Station> result = new ArrayList<Station>();
+        Iterable<Station> stations = repository.findAll();
+        for (Station station : stations) {
+            result.add(station);
         }
         return result;
     }

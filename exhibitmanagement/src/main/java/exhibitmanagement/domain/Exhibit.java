@@ -40,6 +40,11 @@ public class Exhibit  implements Serializable {
         return sceneType;
     }
 
+    private Exhibit()
+    {
+
+    }
+
     public Exhibit(Builder builder) {
 
         id = builder.id;

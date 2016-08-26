@@ -13,61 +13,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Set;
-
+import java.util.List;
 /**
  * Created by Bonga on 8/13/2016.
  */
 public class ExhibitController {
 
-
     // Inject Service
     @Autowired
-    private ExhibitService adminService;
+    private ExhibitService exhibitService;
 
     //-------------------Retrieve Single Story--------------------------------------------------------
-    @RequestMapping(value = "/exh/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/exhibit/read/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Exhibit> getExhibit(@PathVariable("id") long id) {
-        Exhibit admin = adminService.readById(id);
-        if (admin == null) {
+        Exhibit exhibit = exhibitService.readById(id);
+        if (exhibit == null) {
             return new ResponseEntity<Exhibit>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Exhibit>(admin, HttpStatus.OK);
+        return new ResponseEntity<Exhibit>(exhibit, HttpStatus.OK);
     }
 
-
-
     //------------------- Delete a Story --------------------------------------------------------
-
-    @RequestMapping(value = "/exh/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/exhibit/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Exhibit> deleteExhibit(@PathVariable("id") long id) {
-        Exhibit admin = adminService.readById(id);
-        if (admin == null) {
+        Exhibit exhibit = exhibitService.readById(id);
+        if (exhibit == null) {
             return new ResponseEntity<Exhibit>(HttpStatus.NOT_FOUND);
         }
-        adminService.delete(admin);
+        exhibitService.delete(exhibit);
         return new ResponseEntity<Exhibit>(HttpStatus.NO_CONTENT);
     }
 
     //-------------------Retrieve All Stories--------------------------------------------------------
-
-    @RequestMapping(value = "/exh/", method = RequestMethod.GET)
-    public ResponseEntity<Set<Exhibit>> getBiology() {
-        Set<Exhibit> admin = adminService.readAll();
-        if(admin.isEmpty()){
-            return new ResponseEntity<Set<Exhibit>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    @RequestMapping(value = "/exhibit/all", method = RequestMethod.GET)
+    public ResponseEntity<List<Exhibit>> getExhibit() {
+        List<Exhibit> exhibit = exhibitService.readAll();
+        if(exhibit.isEmpty()){
+            return new ResponseEntity<List<Exhibit>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<Exhibit>>(admin, HttpStatus.OK);
+        return new ResponseEntity<List<Exhibit>>(exhibit, HttpStatus.OK);
     }
 
-
     //-------------------Create a Story--------------------------------------------------------
-
-    @RequestMapping(value = "/exh/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createExhibit(@RequestBody Exhibit admin, UriComponentsBuilder ucBuilder) {
-        adminService.create(admin);
+    @RequestMapping(value = "/exhibit/create", method = RequestMethod.POST)
+    public ResponseEntity<Void> createExhibit(@RequestBody Exhibit exhibit, UriComponentsBuilder ucBuilder) {
+        exhibitService.create(exhibit);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/exh/{id}").buildAndExpand(admin.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/exh/{id}").buildAndExpand(exhibit.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 }

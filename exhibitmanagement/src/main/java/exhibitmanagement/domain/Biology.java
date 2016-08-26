@@ -14,11 +14,16 @@ public class Biology implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-
     private long id;
     private String reference;
     private String name;
     private String type;
+
+    public Biology()
+    {
+
+    }
+
 
     public long getId() {
         return id;
@@ -74,7 +79,13 @@ public class Biology implements Serializable {
             return this;
         }
 
+
+
+        }
+
+    /*
         public Builder copy(Biology biology){
+            this.id = biology.getId();
             this.name = biology.getName();
             this.reference = biology.getReference();
             this.type = biology.getType();
@@ -84,6 +95,12 @@ public class Biology implements Serializable {
         public Biology build() {
             return new Biology(this);
         }
+
+
+
     }
+
+*/
+
 
 }

@@ -1,10 +1,7 @@
 package exhibitmanagement;
 
-import exhibitmanagement.domain.Administrator;
 import exhibitmanagement.domain.Ballistic;
-import exhibitmanagement.factory.AdministratorFactory;
 import exhibitmanagement.factory.BallisticFactory;
-import exhibitmanagement.repository.AdministratorRepository;
 import exhibitmanagement.repository.BallisticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;

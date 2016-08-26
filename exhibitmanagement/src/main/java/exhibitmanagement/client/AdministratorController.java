@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,7 +24,7 @@ public class AdministratorController {
     private AdministratorService adminService;
 
     //-------------------Retrieve Single Story--------------------------------------------------------
-    @RequestMapping(value = "/admin/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/admin/read/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Administrator> getAdministrator(@PathVariable("id") long id) {
         Administrator admin = adminService.readById(id);
         if (admin == null) {
@@ -35,7 +36,7 @@ public class AdministratorController {
 
     //------------------- Delete a Story --------------------------------------------------------
 
-    @RequestMapping(value = "/admin/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Administrator> deleteAdministrator(@PathVariable("id") long id) {
         Administrator admin = adminService.readById(id);
         if (admin == null) {
@@ -47,23 +48,25 @@ public class AdministratorController {
 
     //-------------------Retrieve All Stories--------------------------------------------------------
 
-    @RequestMapping(value = "/admin/", method = RequestMethod.GET)
-    public ResponseEntity<Set<Administrator>> getAdministrator() {
-        Set<Administrator> admin = adminService.readAll();
+    @RequestMapping(value = "/admin/all", method = RequestMethod.GET)
+    public ResponseEntity<List<Administrator>> getAdministrator() {
+        List<Administrator> admin = adminService.readAll();
         if(admin.isEmpty()){
-            return new ResponseEntity<Set<Administrator>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+            return new ResponseEntity<List<Administrator>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<Administrator>>(admin, HttpStatus.OK);
+        return new ResponseEntity<List<Administrator>>(admin, HttpStatus.OK);
     }
 
 
     //-------------------Create a Story--------------------------------------------------------
 
-    @RequestMapping(value = "/admin/", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/create", method = RequestMethod.POST)
     public ResponseEntity<Void> createAdministrator(@RequestBody Administrator admin, UriComponentsBuilder ucBuilder) {
         adminService.create(admin);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/admin/{id}").buildAndExpand(admin.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+
+
 }

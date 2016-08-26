@@ -1,8 +1,6 @@
 package exhibitmanagement.client;
 
-import exhibitmanagement.domain.Exhibit;
 import exhibitmanagement.domain.Station;
-import exhibitmanagement.services.ExhibitService;
 import exhibitmanagement.services.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,54 +21,48 @@ import java.util.Set;
  */
 public class StationController {
 
-
     // Inject Service
     @Autowired
-    private StationService adminService;
+    private StationService stationService;
 
     //-------------------Retrieve Single Story--------------------------------------------------------
-    @RequestMapping(value = "/stat/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/station/read/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Station> getStation(@PathVariable("id") long id) {
-        Station admin = adminService.readById(id);
-        if (admin == null) {
+        Station station = stationService.readById(id);
+        if (station == null) {
             return new ResponseEntity<Station>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Station>(admin, HttpStatus.OK);
+        return new ResponseEntity<Station>(station, HttpStatus.OK);
     }
 
-
-
     //------------------- Delete a Story --------------------------------------------------------
-
-    @RequestMapping(value = "/stat/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/station/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Station> deleteStation(@PathVariable("id") long id) {
-        Station admin = adminService.readById(id);
-        if (admin == null) {
+        Station station = stationService.readById(id);
+        if (station == null) {
             return new ResponseEntity<Station>(HttpStatus.NOT_FOUND);
         }
-        adminService.delete(admin);
+        stationService.delete(station);
         return new ResponseEntity<Station>(HttpStatus.NO_CONTENT);
     }
 
     //-------------------Retrieve All Stories--------------------------------------------------------
 
-    @RequestMapping(value = "/stat/", method = RequestMethod.GET)
-    public ResponseEntity<Set<Station>> getBiology() {
-        Set<Station> admin = adminService.readAll();
-        if(admin.isEmpty()){
-            return new ResponseEntity<Set<Station>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    @RequestMapping(value = "/station/all", method = RequestMethod.GET)
+    public ResponseEntity<List<Station>> getStation() {
+        List<Station> station = stationService.readAll();
+        if(station.isEmpty()){
+            return new ResponseEntity<List<Station>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<Station>>(admin, HttpStatus.OK);
+        return new ResponseEntity<List<Station>>(station, HttpStatus.OK);
     }
 
-
     //-------------------Create a Story--------------------------------------------------------
-
-    @RequestMapping(value = "/stat/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createStation(@RequestBody Station admin, UriComponentsBuilder ucBuilder) {
-        adminService.create(admin);
+    @RequestMapping(value = "/station/create", method = RequestMethod.POST)
+    public ResponseEntity<Void> createStation(@RequestBody Station station, UriComponentsBuilder ucBuilder) {
+        stationService.create(station);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/stat/{id}").buildAndExpand(admin.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/stat/{id}").buildAndExpand(station.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 }

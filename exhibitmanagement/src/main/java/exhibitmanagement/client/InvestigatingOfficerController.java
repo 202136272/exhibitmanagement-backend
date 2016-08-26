@@ -1,9 +1,7 @@
 package exhibitmanagement.client;
 
 import exhibitmanagement.domain.InvestigatingOfficer;
-import exhibitmanagement.domain.Station;
 import exhibitmanagement.services.InvestigatingOfficerService;
-import exhibitmanagement.services.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,51 +23,47 @@ public class InvestigatingOfficerController  {
 
     // Inject Service
     @Autowired
-    private InvestigatingOfficerService adminService;
+    private InvestigatingOfficerService officerService;
 
     //-------------------Retrieve Single Story--------------------------------------------------------
-    @RequestMapping(value = "/io/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/officer/read/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<InvestigatingOfficer> getStation(@PathVariable("id") long id) {
-        InvestigatingOfficer admin = adminService.readById(id);
-        if (admin == null) {
+        InvestigatingOfficer officer = officerService.readById(id);
+        if (officer == null) {
             return new ResponseEntity<InvestigatingOfficer>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<InvestigatingOfficer>(admin, HttpStatus.OK);
+        return new ResponseEntity<InvestigatingOfficer>(officer, HttpStatus.OK);
     }
 
-
-
     //------------------- Delete a Story --------------------------------------------------------
-
-    @RequestMapping(value = "/io/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<InvestigatingOfficer> deleteStation(@PathVariable("id") long id) {
-        InvestigatingOfficer admin = adminService.readById(id);
-        if (admin == null) {
+    @RequestMapping(value = "/officer/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<InvestigatingOfficer> deleteOfficer(@PathVariable("id") long id) {
+        InvestigatingOfficer officer = officerService.readById(id);
+        if (officer == null) {
             return new ResponseEntity<InvestigatingOfficer>(HttpStatus.NOT_FOUND);
         }
-        adminService.delete(admin);
+        officerService.delete(officer);
         return new ResponseEntity<InvestigatingOfficer>(HttpStatus.NO_CONTENT);
     }
 
     //-------------------Retrieve All Stories--------------------------------------------------------
-
-    @RequestMapping(value = "/io/", method = RequestMethod.GET)
-    public ResponseEntity<Set<InvestigatingOfficer>> getBiology() {
-        Set<InvestigatingOfficer> admin = adminService.readAll();
-        if(admin.isEmpty()){
-            return new ResponseEntity<Set<InvestigatingOfficer>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    @RequestMapping(value = "/officer/all", method = RequestMethod.GET)
+    public ResponseEntity<List<InvestigatingOfficer>> getOfficer() {
+        List<InvestigatingOfficer> exhibit = officerService.readAll();
+        if(exhibit.isEmpty()){
+            return new ResponseEntity<List<InvestigatingOfficer>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<InvestigatingOfficer>>(admin, HttpStatus.OK);
+        return new ResponseEntity<List<InvestigatingOfficer>>(exhibit, HttpStatus.OK);
     }
 
 
     //-------------------Create a Story--------------------------------------------------------
 
     @RequestMapping(value = "/io/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createStation(@RequestBody InvestigatingOfficer admin, UriComponentsBuilder ucBuilder) {
-        adminService.create(admin);
+    public ResponseEntity<Void> createOfficer(@RequestBody InvestigatingOfficer officer, UriComponentsBuilder ucBuilder) {
+        officerService.create(officer);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/io/{id}").buildAndExpand(admin.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/io/{id}").buildAndExpand(officer.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 }

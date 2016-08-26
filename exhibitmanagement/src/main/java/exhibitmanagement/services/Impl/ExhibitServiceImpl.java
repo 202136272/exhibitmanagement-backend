@@ -4,13 +4,15 @@ import exhibitmanagement.domain.Exhibit;
 import exhibitmanagement.repository.ExhibitRepository;
 import exhibitmanagement.services.ExhibitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Bonga on 8/13/2016.
  */
+@Service
 public class ExhibitServiceImpl implements ExhibitService {
 
     @Autowired
@@ -26,10 +28,11 @@ public class ExhibitServiceImpl implements ExhibitService {
     }
 
     @Override
-    public Set<Exhibit> readAll() {
-        Set<Exhibit> result = new HashSet<Exhibit>();
-        while (repository.findAll().iterator().hasNext()) {
-            result.add(repository.findAll().iterator().next());
+    public List<Exhibit> readAll() {
+        List<Exhibit> result = new ArrayList<Exhibit>();
+        Iterable<Exhibit> exhibits = repository.findAll();
+        for (Exhibit exhibit : exhibits) {
+            result.add(exhibit);
         }
         return result;
     }

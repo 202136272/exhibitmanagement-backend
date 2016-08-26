@@ -5,9 +5,8 @@ import exhibitmanagement.repository.AdministratorRepository;
 import exhibitmanagement.services.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Bonga on 8/6/2016.
@@ -28,10 +27,11 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public Set<Administrator> readAll() {
-        Set<Administrator> result = new HashSet<Administrator>();
-        while (repository.findAll().iterator().hasNext()) {
-            result.add(repository.findAll().iterator().next());
+    public List<Administrator> readAll() {
+        List<Administrator> result = new ArrayList<Administrator>();
+        Iterable<Administrator> administrators = repository.findAll();
+        for (Administrator admin : administrators) {
+            result.add(admin);
         }
         return result;
     }
@@ -44,6 +44,5 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public void delete(Administrator entity) {
         repository.delete(entity);
-
     }
 }

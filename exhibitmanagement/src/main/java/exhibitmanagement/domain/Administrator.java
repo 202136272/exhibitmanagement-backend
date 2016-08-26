@@ -32,10 +32,10 @@ public class Administrator implements Serializable {
         return persalNumber;
     }
 
-public Administrator()
-{
+    private Administrator()
+    {
 
-}
+    }
 
     public Administrator(Builder builder) {
         id = builder.id;

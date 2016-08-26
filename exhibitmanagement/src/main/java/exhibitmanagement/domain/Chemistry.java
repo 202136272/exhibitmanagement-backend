@@ -41,6 +41,12 @@ public class Chemistry implements Serializable {
         return effect;
     }
 
+    private Chemistry()
+    {
+
+    }
+
+
     public Chemistry(Builder builder) {
         id = builder.id;
         mass = builder.mass;
