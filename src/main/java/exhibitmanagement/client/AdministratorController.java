@@ -56,8 +56,7 @@ public class AdministratorController {
         return new ResponseEntity<List<Administrator>>(admin, HttpStatus.OK);
     }
 
-
-    //-------------------Create a Story--------------------------------------------------------
+    //-------------------Create a Story API--------------------------------------------------------
 
     @RequestMapping(value = "/admin/create", method = RequestMethod.POST)
     public ResponseEntity<Void> createAdministrator(@RequestBody Administrator admin, UriComponentsBuilder ucBuilder) {
