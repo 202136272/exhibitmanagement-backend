@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/exhibitmanagement/exhibitmanagement.iml" filepath="$PROJECT_DIR$/exhibitmanagement/exhibitmanagement.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/exhibitmanagement-backend.iml" filepath="$PROJECT_DIR$/.idea/exhibitmanagement-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExhibitManagementBackEnd.iml" filepath="$PROJECT_DIR$/ExhibitManagementBackEnd.iml" />
     </modules>
   </component>
 </project>
