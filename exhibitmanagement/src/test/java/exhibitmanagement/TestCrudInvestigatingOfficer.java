@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  * Created by Bonga on 8/14/2016.
  */
 
-@SpringApplicationConfiguration(classes= App.class)
+/*@SpringApplicationConfiguration(classes= App.class)
 @WebAppConfiguration
 public class TestCrudInvestigatingOfficer extends AbstractTestNGSpringContextTests {
 
@@ -35,4 +35,4 @@ public class TestCrudInvestigatingOfficer extends AbstractTestNGSpringContextTes
     @Test(dependsOnMethods = "create")
     public void read ()throws Exception {
     }
-}
+}*/

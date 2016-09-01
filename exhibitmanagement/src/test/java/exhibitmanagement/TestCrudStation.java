@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 
 
-@SpringApplicationConfiguration(classes= App.class)
+/*@SpringApplicationConfiguration(classes= App.class)
 @WebAppConfiguration
 
 public class TestCrudStation extends AbstractTestNGSpringContextTests {
@@ -37,4 +37,4 @@ public class TestCrudStation extends AbstractTestNGSpringContextTests {
     @Test(dependsOnMethods = "create")
     public void read ()throws Exception {
     }
-}
+}*/
